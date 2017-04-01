@@ -1,0 +1,8 @@
+Langeland:
+  JiraDex:
+    Jira:
+      Api:
+        endpoint: 'https://peytzco.atlassian.net'
+        Authentication:
+          user: ''
+          password: ''

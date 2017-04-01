@@ -17,14 +17,11 @@
     },
     "require": {
         "neos/flow": "~4.0.0",
-        "neos/welcome": "~4.0.0"
+        "chobie/jira-api-restclient": "^2.0@dev"
+
     },
     "require-dev": {
-        "neos/kickstarter": "~4.0.0",
-        "neos/buildessentials": "~4.0.0",
-        "neos/behat": "dev-master",
-        "phpunit/phpunit": "~5.4.0",
-        "mikey179/vfsstream": "~1.6"
+        "neos/kickstarter": "~4.0.0"
     },
     "replace": {
         "typo3/flow-base-distribution": "self.version"
