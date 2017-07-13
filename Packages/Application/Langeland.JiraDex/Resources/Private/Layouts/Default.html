@@ -1,14 +1,71 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title><![CDATA[<f:render section="Title" /></title>
-        <f:base />]]>
-    </head>
-    <body>
-        <![CDATA[<f:flashMessages class="flashmessages" />]]>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <title>
+        <f:render section="Title"/>
+    </title>
 
-        <h1><![CDATA[<f:render section="Title" />]]></h1>
-        <![CDATA[<f:render section="Content" />]]>
-    </body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">
+
+    <!-- Library css -->
+    <link href="{f:uri.resource(path: 'StyleSheets/Libraries.css')}" rel="stylesheet"/>
+
+    <!-- Application css -->
+    <link href="{f:uri.resource(path: 'StyleSheets/Application.css')}" rel="stylesheet"/>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="layout-fixed  ">
+
+<div id="wrapper">
+
+    <div class="navbar navbar-default" role="navigation">
+        <f:render partial="Navigation"/>
+    </div> <!--/.navbar -->
+
+    <div class="sidebar">
+        <f:render partial="Sidebar" arguments="{_all}"/>
+    </div> <!-- /.side-menu -->
+
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <f:flashMessages class="flashmessages"/>
+                <f:render section="Content"/>
+            </div> <!-- /.container -->
+        </div> <!-- .content -->
+    </div> <!-- /.content-page -->
+
+</div> <!-- /#wrapper -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Core JS -->
+<script src="{f:uri.resource(path: 'JavaScript/Libraries.min.js')}"></script>
+<script src="{f:uri.resource(path: 'JavaScript/Application.min.js')}"></script>
+
+</body>
 </html>

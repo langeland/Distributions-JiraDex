@@ -30,6 +30,9 @@ class JiraCommandController extends CommandController
      */
     protected $jiraService;
 
+    /**
+     * List all boards in Jira. This only includes boards that the user has permission to view.
+     */
     public function boardsCommand()
     {
         $boards = $this->jiraService->getBoards();
@@ -45,6 +48,8 @@ class JiraCommandController extends CommandController
 
 
     /**
+     * List all sprints from a board, for a given board Id. This only includes sprints that the user has permission to view.
+     *
      * @param integer $boardId
      */
     public function sprintsCommand($boardId)
@@ -60,6 +65,8 @@ class JiraCommandController extends CommandController
     }
 
     /**
+     * Shows the sprint for a given sprint Id. The sprint will only be returned if the user can view the board that the sprint was created on, or view at least one of the issues in the sprint.
+     *
      * @param integer $sprintId
      */
     public function sprintCommand($sprintId)

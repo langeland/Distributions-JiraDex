@@ -2,6 +2,7 @@ version: '2'
 volumes:
   ssh-agent:
     external: true
+
 services:
   application:
     image: cweagans/bg-sync
@@ -16,14 +17,14 @@ services:
   mysql:
     image: mysql:5.6
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: noitacilppa
       MYSQL_USER: application
       MYSQL_PASSWORD: noitacilppa
       MYSQL_DATABASE: application
   nginx:
-    image: nginx:1.9
+    image: nginx:1.13
     dns:
       - 8.8.8.8
       - 8.8.4.4
@@ -52,7 +53,7 @@ services:
       FLOW_CONTEXT: Development/Docker
       SSH_AUTH_SOCK: /ssh-agent/ssh-agent.sock
 
-#  devtools:
-#    image: pcodk/devtools
-#    volumes_from:
-#      - application
+  devtools:
+    image: pcodk/devtools
+    volumes_from:
+      - application

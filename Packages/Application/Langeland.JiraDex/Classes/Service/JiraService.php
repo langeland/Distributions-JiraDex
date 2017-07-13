@@ -61,21 +61,30 @@ class JiraService
      */
     public function getSprints($boardId, $state = array())
     {
-        $isLast = false;
-        $params = array('startAt' => 0, 'maxResults' => 50);
-        $sprints = array();
-        while ($isLast == false) {
-            $response = $this->jira->api(Api::REQUEST_GET, sprintf('/rest/agile/1.0/board/%s/sprint', $boardId), $params);
-            $sprints = array_merge($sprints, $response->getResult()['values']);
-            if ($response->getResult()['isLast']) {
-                break;
-            }
-            $params['startAt'] = $params['startAt'] + $params['maxResults'];
-        }
+        $callIdentifier = 'getSprints' . sha1(json_encode(func_get_args()));
 
-        $sprints = array_filter($sprints, function ($v) {
-            return $v['state'] == 'active';
-        });
+        if (!$this->apiCache->has($callIdentifier)) {
+
+            $isLast = false;
+            $params = array('startAt' => 0, 'maxResults' => 50);
+            $sprints = array();
+            while ($isLast == false) {
+                $response = $this->jira->api(Api::REQUEST_GET, sprintf('/rest/agile/1.0/board/%s/sprint', $boardId), $params);
+                $sprints = array_merge($sprints, $response->getResult()['values']);
+                if ($response->getResult()['isLast']) {
+                    break;
+                }
+                $params['startAt'] = $params['startAt'] + $params['maxResults'];
+            }
+
+            $sprints = array_filter($sprints, function ($v) {
+                return in_array($v['state'], array('active', 'future'));
+            });
+
+            $this->apiCache->set($callIdentifier, $sprints);
+        } else {
+            $sprints = $this->apiCache->get($callIdentifier);
+        }
 
         return $sprints;
     }
@@ -108,7 +117,7 @@ class JiraService
      */
     public function getIssuesForSprint($sprintId, $jql = null, $fields = null, $expand = null)
     {
-        $callIdentifier = sha1(json_encode(func_get_args()));
+        $callIdentifier = 'getIssuesForSprint' . sha1(json_encode(func_get_args()));
 
         if (!$this->apiCache->has($callIdentifier)) {
 
@@ -137,6 +146,4 @@ class JiraService
 
         return $issues;
     }
-
-
 }

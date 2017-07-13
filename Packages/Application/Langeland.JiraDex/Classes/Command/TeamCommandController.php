@@ -1,4 +1,5 @@
 <?php
+
 namespace Langeland\JiraDex\Command;
 
 /*
@@ -30,10 +31,26 @@ class TeamCommandController extends CommandController
      */
     protected $jiraService;
 
+    /**
+     * List all teams
+     */
     public function listCommand()
     {
-        $teamMembers = $this->teamRepository->findAll();
-        \Neos\Flow\var_dump($teamMembers->toArray());
+        $teams = $this->teamRepository->findAll();
+        $teamsList = array();
+        /** @var Team $team */
+        foreach ($teams as $team) {
+            $teamsList[] = array(
+                $team->getName(),
+                $team->getJiraBoardId(),
+                count($team->getSprints()),
+                'N/A'
+            );
+        }
+        $this->outputLine('');
+        $this->outputLine('Teams');
+        $this->output->outputTable($teamsList, array('Name', 'JiraBoardId', '# Sprints', 'Active sprint'));
+
     }
 
     /**

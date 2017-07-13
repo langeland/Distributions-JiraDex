@@ -8,7 +8,7 @@
 # possible configuration options.                                        #
 #                                                                        #
 
-NEOS:
+Neos:
   Flow:
     persistence:
       backendOptions:
@@ -16,7 +16,7 @@ NEOS:
         dbname: 'application'       # adjust to your database name
         user: 'application'             # adjust to your database user
         password: 'noitacilppa'         # adjust to your database password
-        driver: 'PDO'
+        driver: 'pdo_mysql'
 
        # if you want to log executed SQL queries, enable the next 2 lines
 #      doctrine:

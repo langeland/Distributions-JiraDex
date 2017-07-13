@@ -16,6 +16,15 @@ class SprintReport
 {
 
     /**
+     * @var string
+     *
+     * @Flow\Identity
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="UUID")
+     */
+    protected $identifier;
+
+    /**
      * @var Sprint
      * @ORM\OneToOne()
      */

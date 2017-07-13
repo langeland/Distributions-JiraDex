@@ -14,11 +14,25 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TeamMember
 {
+    /**
+     * @var string
+     *
+     * @Flow\Identity
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="UUID")
+     */
+    protected $identifier;
 
     /**
      * @var string
      */
     protected $initials;
+
+    /**
+     * @var Team
+     * @ORM\ManyToOne(inversedBy="teamMembers")
+     */
+    protected $team;
 
     /**
      * @var array
@@ -30,6 +44,24 @@ class TeamMember
      * @var string
      */
     protected $name;
+
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @param string $identifier
+     * @return TeamMember
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+        return $this;
+    }
 
     /**
      * @return string
@@ -47,6 +79,24 @@ class TeamMember
     {
         $this->initials = $initials;
 
+        return $this;
+    }
+
+    /**
+     * @return Team
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * @param Team $team
+     * @return TeamMember
+     */
+    public function setTeam($team)
+    {
+        $this->team = $team;
         return $this;
     }
 
